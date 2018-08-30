@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebAppNTCEcommerce2._0.Models.Produto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descontoPromocao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ativoProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qtdMinEstoque)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imagem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria.nomeCategoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.loginUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeProduto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descProduto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precProduto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descontoPromocao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ativoProduto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qtdMinEstoque)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imagem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria.nomeCategoria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.loginUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idProduto }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idProduto }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idProduto })
+        </td>
+    </tr>
+}
+
+</table>

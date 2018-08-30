@@ -1,0 +1,72 @@
+﻿
+@model IEnumerable<WebAppNTCEcommerce2._0.Models.Categoria>
+@{var carrinho = (List<WebAppNTCEcommerce2._0.Controllers.ItemCarrinho>)Session["Carrinho"];}
+
+<div class="container">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light navbacor fixed-top mb-3">
+            @* LOGO *@
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-2">
+                <div class="logo">
+                    <a href="~/Home/Index" title="Voltar à Página Inicial do Supermercado HIPPO"><img src="~/img/logom.png" /></a>
+                </div>
+            </div>
+            <button class="navbar-toggler" id="menuHamburger" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @* FOREACH DO MENU *@
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-7">
+                <div class="collapse navbar-collapse navMenu" id="navbarSupportedContent">
+                    <div class="menu_produto">
+                        <ul class="navbar-nav mr-auto">
+                            @foreach (var item in Model)
+                            {
+                                <li class="nav-item active">
+                                    @Html.ActionLink(item.nomeCategoria, "ListarProdutos", "Produto",
+                                    routeValues: new { id = item.idCategoria }, htmlAttributes: new { @class = "linkProduto" })
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            @* CAMPO BUSCA-CARRINHO *@
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-2 col-2">
+                <div class="lupa">
+                    <i class="fas fa-search img_lupa fa-lg" alt="lupa"></i>
+                </div>
+                
+                @using (@Html.BeginForm(actionName: "Consultar", controllerName: "Produto", method: FormMethod.Get, htmlAttributes: new { @class = "form-search" }))
+                {
+                    <div class="form-item">
+                        <input class="ui-widget" type="text" name="pesquisar" id="busca" style="display:none;" title="pesquisar" placeholder="Pesquise o seu produto" />
+                        <button type="submit" id="buscar_botao" style="display:none;"><i class="icon icon-search"></i>Buscar</button>
+                    </div>
+                }
+                <div class="carrinho">
+                    
+                    <button id="btn-cart">
+                      
+                        <a href="~/Produto/Carrinho">
+                            <i class="fas fa-shopping-cart img" title="carrinho"></i>
+                            <span class="cart-count">
+                                @(carrinho==null?0:carrinho.Count)
+                            </span>
+                        </a>
+
+                    </button>
+
+                </div>
+
+                <div class="x fa-lg" style="display:none">
+                    <i class="fas fa-times"></i>
+                </div>
+
+                <div class="login">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </nav>
+    </div> <!-- ROW -->
+</div><!-- container -->

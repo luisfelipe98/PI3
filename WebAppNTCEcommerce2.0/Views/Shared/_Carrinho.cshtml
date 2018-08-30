@@ -1,0 +1,175 @@
+﻿
+@{
+
+    ViewBag.Title = "Carrinho";
+    var itens = (List<WebAppNTCEcommerce2._0.Controllers.ItemCarrinho>)Session["Carrinho"];
+}
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col" style="font-family: 'Oswald',sans-serif;">Produto</th>
+                            <th scope="col" style="font-family: 'Oswald',sans-serif;">Avaliação</th>
+                            <th scope="col" style="font-family: 'Oswald',sans-serif;" class="text-center">Quantidade</th>
+                            <th scope="col" style="font-family: 'Oswald',sans-serif;" class="text-right">Valor Unitario</th>
+                            <th scope="col" style="font-family: 'Oswald',sans-serif;" class="text-right">Subtotal</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (itens != null)
+                            {
+                                foreach (var item in itens)
+                                {
+                        <tr>
+                            <td><img class="imagem_bloco" src="@("data:image/png;base64," + item.productImage)" /> </td>
+                            <td style="font-family: 'Oswald',sans-serif;">@item.productName</td>
+                            <td style="font-family: 'Oswald',sans-serif;">Em estoque</td>
+                            <td>
+                                <a class="mais"><i class="fas fa-plus-square" alt="mais produtos" title="mais produtos"></i></a>
+                                <input class="form-control qtde" type="text" value=@item.productQtd />
+                                <a class="menos"><i class="fas fa-minus-square" alt="menos produtos" title="menos produtos"></i></a>
+                            </td>
+                            <td class="text-right" style="font-family: 'Oswald',sans-serif;">@item.productPrice.ToString("#,#0.00")</td>
+                            @{
+                                var precoString = @item.productPrice.ToString("#,#0.00");
+                                var vlparcial = @item.productQtd * double.Parse(precoString);
+
+                            }
+                            <td class="text-right" style="font-family: 'Oswald',sans-serif;">@vlparcial.ToString("#,#0.00")</td>
+                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                        </tr>                                 
+                                }
+                            }
+                        }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong style="font-family: 'Oswald',sans-serif;">Total</strong></td>
+                            <td class="text-right"><strong >@Session["Total"].ToString()</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <a href="/" id="botaoComprarCheck" class="btn btn-block btn-light" style="font-family: 'Oswald',sans-serif;">Continue comprando</a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <button class="btn btn-lg btn-block btn-success text-uppercase check"> @Html.ActionLink("Seguir para pagamento", "EfetuarPagamento", "Checkout")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<section id="cart">
+    <div class="cart-header">
+            <table>
+               <thead>
+                   <tr>
+                       <div class="row">
+                           <div class="col-md-3">
+                               <td class="cart-product-photo-title produto">
+                                   Produto
+                               </td>
+                           </div>
+                           <div class="col-md-3">
+                               <td class="cart-product-price-title preco">
+                                   Preço
+                               </td>
+                           </div>
+                           <div class="col-md-3">
+                               <td class="cart-product-qtd-title qtd">
+                                   Quantidade
+                               </td>
+                           </div>
+                           <div class="col-md-3">
+                               <td class="cart-product-total-title sub">
+                                   Sub-Total
+                               </td>
+                           </div>
+                       </div>
+                   </tr>
+               </thead>
+            <tbody class="info-carrinho">
+                @{
+            if (itens != null)
+            {
+                foreach (var item in itens)
+                {
+                    <tr>
+                        <td>
+                            <img class="card" id="imagem_bloco" src="@("data:image/png;base64," + item.productImage)" />
+                        </td>
+                        <td>
+                            <span class="card" id="imagem_bloco" style="width: 10rem;height: auto">@item.productName</span>
+                        </td>
+                        <td>
+                            <span class="card" id="imagem_bloco" style="width: 5rem;height: auto">@item.productPrice</span>
+                        </td>
+                        <td>
+                            <span class="card" id="imagem_bloco" style="width: 5rem;height: auto">@item.productQtd</span>
+                        </td>
+                        <td>
+                            <span class="card" id="imagem_bloco" style="width:5rem;height: auto">@item.productTotal</span>
+                        </td>
+                    </tr>
+        }
+    }
+
+
+                }
+            </tbody>
+            </table>
+
+        </div>
+
+        <div class="cart-body">
+            <div class="wrap">
+                <table>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="cart-buttons">
+            <div class="wrap">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="cart-checkout-buttons">
+                                <ul class="navigation navigation-buttons">
+                                    <li>
+
+                                        <a href="/" class="btn btn-type-2">Continuar Comprando</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="" id="btn-checkout" class="btn btn-type-3">Checkout</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td class="cart-total-products">
+                                Total: <span class="cart-total-price-products">R$ <span class="price">@Session["Total"].ToString()</span></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>*@
+
+
+

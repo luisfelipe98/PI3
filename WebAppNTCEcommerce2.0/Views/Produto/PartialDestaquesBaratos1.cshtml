@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebAppNTCEcommerce2._0.Models.Produto>
+
+<div class="container">
+    <div class="bloco">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="card" id="imagem_bloco" style="width: 18rem;">
+                        @{
+                            string imgProduct = string.Empty, nameProduct = string.Empty;
+                            string price = Convert.ToDecimal(item.precProduto - (item.precProduto * (item.descontoPromocao / 100))).ToString("#,#0.00");
+                            if (item.imagem != null)
+                            {
+                                string base64String = Convert.ToBase64String(item.imagem);
+                                imgProduct = "data:image/png;base64," + base64String;
+                                nameProduct = @item.nomeProduto;
+                            }
+                            else
+                            {
+                                imgProduct = "/img/default_product.png";
+                                nameProduct = "Não foi possível encontrar a imagem do produto.";
+                            }
+                            <a id="product-@item.idProduto" href="~/Produto/Detalhes/@item.idProduto" data-product-id="@item.idProduto" data-product-name="@item.nomeProduto" data-product-price="@price" class="nProduto">
+                                <img draggable="true"  src=@imgProduct id="product-image-@item.idProduto" class="product-image nProdutos" alt="@nameProduct" title="@nameProduct" />
+                            </a>
+                        }
+                    </div>
+                    <div class="card-body informacao">
+                        <p class="card-text" id="fonte">
+                            @Html.ActionLink(item.nomeProduto, "Detalhes", "Produto",
+                                      routeValues: new { id = item.idProduto },
+                                      htmlAttributes: new { @class = "itemProduto" })
+                        </p>
+                        <div class="card-bottom">
+                            <p class="fonte_preco_P">De:  <span id="fonte_preco">@Html.DisplayFor(modelItem => item.precProduto)</span></p>
+                            <p class="fonte_preco_">Por: <span id="fonte_preco_vermelho">@price</span></p>
+
+
+                        </div>
+                    </div>
+                </div>
+                            }
+        </div>
+    </div>
+</div>
+

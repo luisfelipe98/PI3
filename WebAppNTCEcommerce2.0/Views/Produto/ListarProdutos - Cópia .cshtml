@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebAppNTCEcommerce2._0.Models.Produto>
+
+@ViewBag.Resultado
+
+
+<h2>@ViewBag.Title</h2>
+
+<aside>
+    <form method="get" id="form_ordenador">
+        <input type="hidden" class="nomeDoProduto" name="idCategoria" value="@ViewBag.IdCategoria" />
+        <select id="ordenar" name="ordenar">
+            <option value="1">Ordenar</option>
+            <option value="2">Por preço</option>
+            <option value="3">Por preço descresente</option>
+            <option value="4">Por nome</option>
+        </select>
+        <input type="submit" class="filtro" value="Filtrar" />
+    </form>
+</aside>
+<div class="container">
+    <div class="bloco">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4" >
+                <div class="card"  id="imagem_bloco" style="width: 18rem;">
+                    @{
+                        string imgProduct = string.Empty, nameProduct = string.Empty;
+                        string price = Convert.ToDecimal(item.precProduto - (decimal)item.descontoPromocao).ToString("#,#0.00");
+                        if (item.imagem != null)
+                        {
+                            string base64String = Convert.ToBase64String(item.imagem);
+                            imgProduct = "data:image/png;base64," + base64String;
+                            nameProduct = @item.nomeProduto;
+                        }
+                        else
+                        {
+                            imgProduct = "/img/default_product.png";
+                            nameProduct = "Não foi possível encontrar a imagem do produto.";
+                        }
+                        <a id="product-@item.idProduto" href="~/Produto/Detalhes/@item.idProduto" data-product-id="@item.idProduto" data-product-name="@item.nomeProduto" data-product-price="@price" class="nProduto">
+                            <img draggable="true" src=@imgProduct id="product-image-@item.idProduto" class="product-image" alt="@nameProduct" title="@nameProduct" />
+                        </a>
+                    }
+                </div>
+                <div class="card-body informacao">
+                    <p class="card-text" id="fonte">
+                        @Html.ActionLink(item.nomeProduto, "Detalhes", "Produto",
+                                      routeValues: new { id = item.idProduto },
+                                      htmlAttributes: new { @class = "itemProduto" })
+                    </p>
+                    <div class="card-bottom">
+                        <p id="fonte_preco_P">De:  <span id="fonte_preco">@Html.DisplayFor(modelItem => item.precProduto)</span></p>
+                        <p id="fonte_preco_">Por: <span id="fonte_preco">@Html.DisplayFor(modelItem => item.descontoPromocao)</span></p>
+                    </div>
+                    <br />
+                    <button type="submit" id="comprar" name="comprar">Comprar</button>
+                </div>
+            </div>
+         }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model WebAppNTCEcommerce2._0.Models.Endereco
+@{
+    ViewBag.Title = "Endereco";
+}
+<section id="Endereco">
+    <div class="wrap">
+        <div id="content-address-form" class="content-form">
+            <p>Preencha seus dados </p>
+            <hr />
+            
+            @using (Html.BeginForm())
+            {
+
+                @Html.ValidationSummary(true)
+
+                @Html.HiddenFor(model => model.idCliente)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CEPEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.CEPEndereco, new { @class = "form-control form-control-type-2"})
+                        @Html.ValidationMessageFor(model => model.CEPEndereco)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.logradouroEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.logradouroEndereco, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.logradouroEndereco)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nomeEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.nomeEndereco, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.nomeEndereco)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.numeroEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.numeroEndereco, new { @class = "form-control form-control-type-2" })
+                        @Html.ValidationMessageFor(model => model.numeroEndereco)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.complementoEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.complementoEndereco, new { @class = "form-control form-control-type-2" })
+                        @Html.ValidationMessageFor(model => model.complementoEndereco)
+                    </div>
+               </div>
+               <div class="form-group">
+                   @Html.LabelFor(model => model.paisEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                   <div class="col-md-10">
+                       @Html.TextBoxFor(model => model.paisEndereco, new { @class = "form-control form-control-type-2" })
+                       @Html.ValidationMessageFor(model => model.paisEndereco)
+                   </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UFEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.UFEndereco, new { @class = "form-control form-control-type-2" })
+                        @Html.ValidationMessageFor(model => model.UFEndereco)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cidadeEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.cidadeEndereco, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.cidadeEndereco)
+                    </div>
+                </div>
+                <div class="form-item">
+                    <input type="submit" value="Cadastrar" class="btn btn-type-1" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

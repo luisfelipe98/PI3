@@ -1,0 +1,59 @@
+﻿@model WebAppNTCEcommerce2._0.Models.ContaViewModel
+
+@{
+    ViewBag.Title = "Acesse sua conta";
+}
+
+<div class="container">
+
+    <h2 class="tituloLogin">@ViewBag.Title</h2>
+
+    <section id="login">
+        <div class="wrap" id="campos">
+            <div id="content-login-form" class="content-form">
+                <div class="pLogin">
+                    <p id="esquerdoP"><a href="#">Login</a></p>
+                    <p id="direitaP">@Html.ActionLink("Cadastre-se", "Create", "Cliente")</p>
+                </div>
+                @*ReturnUrl = @Request.Url*@
+                @using (Html.BeginForm("Login", "Cliente", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="form-item" id="inputEmail">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control login", placeholder = "Login",  title="O seu login é o e-mail"})
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+
+                    <br />
+                    <div class="form-item" id="inputSenha">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Senha" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                        @Html.ValidationMessage("UserOrPasswordInvalid")
+                        <a id="mostrar_senha"><i class="far fa-eye"></i></a>
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" value="Entrar" class="btn btn-type-1" id="botaoLogin" />
+                    </div>
+                    <br />
+                    <div class="alert-danger" id="acessoNegado">@ViewBag.Mensagem</div>
+                }
+            </div>
+        </div>
+
+        <p id="esqueceuSenha">Esqueceu seu E-mail e senha? <a href="#">Clique aqui</a></p>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+<script>
+    $(function () {
+        $(document).login();
+    });
+
+
+</script>
+

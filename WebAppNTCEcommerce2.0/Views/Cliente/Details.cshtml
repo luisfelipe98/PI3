@@ -1,0 +1,90 @@
+﻿@model WebAppNTCEcommerce2._0.Models.Cliente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeCompletoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomeCompletoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.senhaCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.senhaCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPFCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPFCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.celularCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.celularCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telComercialCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telComercialCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telResidencialCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telResidencialCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dtNascCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtNascCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recebeNewsLetter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recebeNewsLetter)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCliente }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

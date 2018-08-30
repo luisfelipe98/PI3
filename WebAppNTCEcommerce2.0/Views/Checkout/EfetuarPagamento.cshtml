@@ -1,0 +1,82 @@
+﻿@model WebAppNTCEcommerce2._0.Models.Checkout
+
+
+@{
+    ViewBag.Title = "Pagamento";
+}
+<div class="container">
+    <center>
+        <h1>Efetuar pagamento</h1>
+    </center><br /><br />
+    @using (Html.BeginForm("EfetuarPagamento", "Checkout", FormMethod.Post))
+    {
+        <div class='row'>
+            <div class='col-md-4'></div>
+            <div class='col-md-4'>
+                <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
+                <div class='form-row'>
+
+                    @Html.ValidationSummary(true)
+
+                    <div class='col-xs-12 form-group  required'>
+
+                        <label class='control-label'>Nome impresso no Cartão</label>
+                        @Html.TextBoxFor(model => model.NomeImpresso, new
+                        {
+                            @placeholder = "Nome do titular do cartão",
+                            @class = "form-control",
+                            @style = "width:350px;"
+                        })
+                        @Html.ValidationMessageFor(model => model.NomeImpresso)
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class='col-xs-12 form-group  required'>
+                        <label class='control-label'>Número do cartão</label>
+                        @Html.TextBoxFor(model => model.NumeroCartao, new
+                        {
+                            @placeholder = "Número do cartão",
+                            @class = "form-control",
+                            maxlength = "16",
+                            @style = "width:350px;"
+                        })
+                        @Html.ValidationMessageFor(model => model.NumeroCartao)
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class='col-xs-4 form-group cvc required'>
+                        <label class='control-label'>Código verificado</label>
+                        @Html.TextBoxFor(model => model.CodSeguranca, new { @placeholder = "ex. 311", @class = "form-control card-cvc", maxlength = "3" })
+                        @Html.ValidationMessageFor(model => model.CodSeguranca)
+                    </div>
+                    <div class='col-xs-4 form-group required'>
+                        <label class='control-label'>Vencimento</label>
+                        @Html.TextBoxFor(model => model.Vencimento, new { @placeholder = "MM/YYYY", @class = "form-control" })
+                    </div>
+                    <div class='col-xs-4 form-group expiration required'>
+                        <label class='control-label'>Parcelas</label>
+
+                        @Html.TextBoxFor(model => model.Parcelas, new { @placeholder = "Quantidade de parcelas", @class = "form-control form-control-type-2", type = "number", max = "12" })
+                        @Html.ValidationMessageFor(model => model.Parcelas)
+                    </div>
+                </div>
+                @Html.TextBoxFor(model => model.Valor, new { @placeholder = "Total a pagar: " + Session["Total"].ToString(), @class = "form-control form-control-type-2", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.Valor)
+                <div class='form-row'>
+                </div>
+                <div class='form-row'>
+                    <div class='col-md-12 form-group'>
+                        <button class='form-control btn btn-primary submit-button navbacor' type='submit'>Finalizar compra</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    }
+</div>
+           
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

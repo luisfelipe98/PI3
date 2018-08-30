@@ -1,0 +1,13 @@
+﻿@model WebAppNTCEcommerce2._0.Models.Produto
+
+@{
+    ViewBag.Title = "Partial Compras Detalhes";
+
+}
+<div class="cartao_hippo">
+    <img src="~/img/cartao.png" width="50px" height="50px" alt="" />
+    <p>
+        Cartão Hippo: <b>1x de R$ @Html.DisplayFor(model => model.precProduto)</b> <span class="desconto_cartao">(-5%)</span>
+        ou em até 4x de R$ 24,23 sem juros
+    </p>
+</div>

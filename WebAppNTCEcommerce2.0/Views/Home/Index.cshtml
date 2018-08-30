@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="Fcarousel">
+                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                    <!-- Indicadores -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        <li data-target="#demo" data-slide-to="2"></li>
+                    </ul>
+
+                    <!-- O slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/img/Johnnie.png" alt="" width="100%" height="100%">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/img/Ferrero.png" alt="" width="100%" height="100%">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/img/spresunto.png" alt="" width="100%" height="100%">
+                        </div>
+
+                    </div>
+
+                    <!-- Controles esquerdo e direito -->
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 coluna1">
+            <section id="bloco1">
+                <div class="item1">
+                    <p style="font-size:21px;">Doces</p>
+                    <hr class="item-separador"></hr>
+                </div>
+                <div class="item2">
+                    <p style="font-size:40px;">Save 15%</p>
+                    <hr class="item-separador"></hr>
+                </div>
+                <div class="item3">
+                    <p style="font-size:21px;">Só hoje</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-md-4 coluna2">
+            <section id="bloco_center">
+                <div class="bloco_center1">
+                    <p style="font-size:21px;">Hortifruti</p>
+                    <hr class="item-separador"></hr>
+                </div>
+                <div class="bloco_center2">
+                    <p style="font-size:40px;">Save 25%</p>
+                    <hr class="item-separador"></hr>
+                </div>
+                <div class="bloco_center3">
+                    <p style="font-size:21px;">Só hoje</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-md-4 coluna3">
+            <section id="bloco_direita">
+                <div class="bloco_direita1">
+                    <p style="font-size:21px;">Bebidas</p>
+                    <hr class="item-separador"></hr>
+                </div>
+                <div class="bloco_direita2">
+                    <p style="font-size:40px;">Save 50%</p>
+                    <hr class="item-separador"></hr>
+                </div>
+                <div class="bloco_direita3">
+                    <p style="font-size:21px;">Só hoje</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="Fcarousel">
+                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                    <!-- Indicadores -->
+                    <ul class="carousel-indicators sequencia">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                    </ul>
+
+                    <!-- O slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            @Html.Action("PartialDestaquesBaratos", "Produto")
+                        </div>
+                        <div class="carousel-item">
+                            @Html.Action("PartialDestaquesBaratos1", "Produto")
+                        </div>
+                    </div>
+
+                    <!-- Controles esquerdo e direito -->
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<div class="container cartao">
+            <div class=" container">
+                <h2 class="centro">Em breve Nosso Cartão!</h2>
+                <p class="centro">Um novo meio de compras na Hippo Supermercados!</p>
+            </div>
+            <div class="col-md-4 container">
+                <img src="~/img/fcard1.png" alt="" width="100%" height="100%">
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="container col-md-8">
+            <h2 class="centro">Confira nossos produtos em destaque!</h2>
+            <p class="centro">Os melhores preços você so encontra aqui!</p>
+        </div>
+
+    *@
+</div>

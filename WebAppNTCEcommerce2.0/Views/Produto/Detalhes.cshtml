@@ -1,0 +1,119 @@
+﻿
+@model WebAppNTCEcommerce2._0.Models.Produto
+
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="detalhe_tudo">
+    <div class="container">
+            <div class="row" id="bloco_detalhes">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-6">
+                    <div class="box_Imagem_Produto">
+                        @{
+
+                            string imgProduct = string.Empty, nameProduct = string.Empty;
+                            string price = Convert.ToDecimal(Model.precProduto - (Model.precProduto * (Model.descontoPromocao / 100))).ToString("#,#0.00");
+
+                            if (Model.imagem != null)
+                            {
+                                string base64String = Convert.ToBase64String(Model.imagem);
+                                imgProduct = "data:image/png;base64," + base64String;
+                                nameProduct = @Model.nomeProduto;
+                            }
+                            else
+                            {
+                                imgProduct = "/img/default_product.png";
+                                nameProduct = "Não foi possível encontrar a imagem do produto.";
+                            }
+                        }
+                        <a id="product-@Model.idProduto" href="~/Produto/Detalhes/@Model.idProduto" data-product-id="@Model.idProduto" data-product-name="@Model.nomeProduto">
+                            <img draggable="true" src=@imgProduct id="@Model.idProduto" class="img-produto nProdutos" alt="@nameProduct" title="@nameProduct" id="imagem_produto" />
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-6">
+                    <h2 class="nomeProduto">@Html.DisplayFor(model => model.nomeProduto)</h2>
+                    <hr class="linha_amarela" />
+
+                    <div class="produto_valor ">
+                        <div class="price_produto">
+                            <span class="span_valorAtual">De R$ @Html.DisplayFor(model => model.precProduto)</span>
+                            <span class="span_valorDesconto">Por @price</span>
+                        </div>
+                      
+                        @using (Html.BeginForm("AddCarrinho", "Produto", new { id = Model.idProduto }, FormMethod.Post))
+                         {
+                        <div class="product-qtd-info">
+                            <span style="font-family: 'Oswald',sans-serif;">Quantidade:</span>
+                            <input class="product-qtd" type="text" id="qtd" name="qtd" value="1" maxlength="2"/>
+                        </div>
+                            <span class="product-available" style="font-family: 'Oswald',sans-serif;">Disponível em estoque</span>
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="+ Carrinho" class="add_carrinho"
+                               name="Submit"/>
+                         }
+                        <hr class="hr_linha" />
+
+                        <div class="cartao_hippo">
+                            <img src="~/img/cartao.png" width="50px" height="50px" alt="" />
+                            @{
+            decimal desconto = Convert.ToDecimal(Model.descontoPromocao) + Convert.ToDecimal(5);
+            string precoHippo = Convert.ToDecimal(Model.precProduto - (Model.precProduto * (desconto / 100))).ToString("#,#0.00");
+                            }
+
+
+                            <p style="font-family: 'Oswald',sans-serif;">
+                                Oferta Exclusiva
+                                Cartão Hippo: <br><b>1x de R$ @precoHippo</b> <span class="desconto_cartao">(-@desconto%)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>@*Final da div container*@
+</div>@*Final div detalhe_tudo*@
+
+
+    <div class="descricao">
+        <header>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-6">
+                    <div class="desc">
+                        <h4 class="desc_cinza ml-4 mt-2">@Html.DisplayNameFor(model => model.descProduto)</h4>
+                        <hr id="sub_linha" />
+                        <hr id="linha_produto" />
+                     </div>
+                    </div>
+                </div>
+        </header>
+        <p class="desc_Produto ml-4 mt-3" style="font-family: 'Oswald',sans-serif;">
+            @Html.DisplayFor(model => model.descProduto)
+        </p>
+    </div>
+
+
+@*
+
+    @Html.DisplayNameFor(model => model.descProduto)
+    @Html.DisplayNameFor(model => model.precProduto)
+
+    @Html.DisplayNameFor(model => model.descontoPromocao)
+    @Html.DisplayFor(model => model.descontoPromocao)
+    @Html.DisplayNameFor(model => model.qtdMinEstoque)
+    @Html.DisplayFor(model => model.qtdMinEstoque)
+    @Html.DisplayNameFor(model => model.Categoria.nomeCategoria)
+*@
+
+    <div class="container">
+        <button class="voltar">
+            <span class="add_carrinho voltar">
+                @Html.ActionLink("Voltar", "ListarProdutos",
+                 routeValues: new { id = @Model.idCategoria })
+            </span>
+        </button>
+    </div>
+
+

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebAppNTCEcommerce2._0.Models.Produto>
+@{
+    ViewBag.Title = "ListarProdutos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post">
+    <input type="hidden" name="idCategoria" value="@ViewBag.IdCategoria" />
+    <select name="ordenar">
+        <option value="1">Por preço</option>
+        <option value="2">Por nome</option>
+    </select>
+    <input type="submit" value="Filtrar" />
+</form>
+
+<p class="alert-info"><b>@ViewBag.Resultado</b></p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descontoPromocao)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.nomeProduto, "Detalhes", "Produto",
+                         routeValues: new { id = item.idProduto },
+                         htmlAttributes: new { @class = "itemProduto" })
+            </td>
+            <td>
+                @{
+                    string strDescricao = item.descProduto;
+                    if (strDescricao.Length > 100)
+                    {
+                        strDescricao = strDescricao.Substring(0, 100) + "...";
+                    }
+                }
+                <a href="~/Produto/Detalhes/@item.idProduto" title="@item.descProduto">@strDescricao</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descontoPromocao)
+            </td>
+        </tr>
+                    }
+
+</table>
+
+
